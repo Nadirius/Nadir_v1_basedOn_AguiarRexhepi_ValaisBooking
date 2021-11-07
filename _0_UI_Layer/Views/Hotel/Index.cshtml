@@ -1,0 +1,103 @@
+﻿@model DTO.Hotel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1 class="display-3 text-center font-weight-bold">Hotel's informations</h1>
+<br />
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10 text-justify">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @switch (Model.Category)
+            {
+                case 1:
+                    <div>★</div>
+                    break;
+                case 2:
+                    <div>★★</div>
+                    break;
+                case 3:
+                    <div>★★★</div>
+                    break;
+                case 4:
+                    <div>★★★★</div>
+                    break;
+                case 5:
+                    <div>★★★★★</div>
+                    break;
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            Wifi included ?
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.HasWifi)
+            {
+                <div class="text-success font-weight-bold">✔</div>
+            }
+            else
+            {
+                <div class="text-danger font-weight-bold">❌</div>
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            Parking included ?
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.HasParking)
+            {
+                <div class="text-success font-weight-bold">✔</div>
+            }
+            else
+            {
+                <div class="text-danger font-weight-bold">❌</div>
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            <a href="mailto:@Model.Email" target="_blank">@Model.Email</a>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+        <dd class = "col-sm-10">
+            <a href="https://@Model.Website" target="_blank">@Model.Website</a>
+        </dd>
+    </dl>
+</div>
+
+
+<div>
+    <a class="text-secondary" asp-action="ReShowRooms" asp-controller="Room">Back to the results</a>
+</div>

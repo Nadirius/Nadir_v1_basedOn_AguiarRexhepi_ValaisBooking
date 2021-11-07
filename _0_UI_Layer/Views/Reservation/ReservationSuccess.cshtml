@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DTO.Reservation>
+
+@{
+    ViewData["Title"] = "Done !";
+    decimal totalToPay = 0.0M;
+}
+
+<h1 class="display-3 text-center font-weight-bold">Reservation Success</h1>
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="text-align:left">Identification number</th>
+            <th style="text-align:center">Check-in date</th>
+            <th style="text-align:center">Check-out date </th>
+            <th style="text-align:center">Number of night</th>
+            <th style="text-align:right">Amount</th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+
+    totalToPay += item.Amount;
+        <tr>
+            <td class="p-3 mb-2 bg-success text-white font-weight-bold" style="text-align:left">
+                @Html.DisplayFor(modelItem => item.IdReservation)@Html.DisplayFor(modelItem => item.FirstName)@Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td style="text-align:center">
+                @item.CheckIn.ToShortDateString()
+            </td>
+            <td style="text-align:center">
+                @item.CheckOut.ToShortDateString()
+            </td>
+            <td style="text-align:center">
+                @item.CheckOut.Subtract(item.CheckIn).Days
+            </td>
+            <td style="text-align:right">
+                @String.Format("{0:0.00}", item.Amount) CHF
+            </td>
+        </tr>
+}
+    <tr class="p-3 mb-2 bg-secondary text-white">
+        <th>Total without taxes</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th style="text-align:right">
+            @String.Format("{0:0.00}", totalToPay) CHF
+        </th>
+    </tr>
+    </tbody>
+</table>

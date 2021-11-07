@@ -1,0 +1,159 @@
+﻿@model UI.SearchRoomInputModel
+
+@{
+    ViewData["Title"] = "Search";
+
+    DateTime today = DateTime.Now;
+    string todayDate = today.AddDays(1.0).ToString("yyyy-MM-dd");
+    string tomorrowDate = today.AddDays(2.0).ToString("yyyy-MM-dd");
+
+    if (TempData.Peek("MyList") != null)
+    {
+        var currentInDateChoosen = (DateTime)TempData.Peek("CheckInDate");
+        var currentOutDateChoosen = (DateTime)TempData.Peek("CheckOutDate");
+        todayDate = currentInDateChoosen.ToString("yyyy-MM-dd");
+        tomorrowDate = currentOutDateChoosen.ToString("yyyy-MM-dd");
+    }
+
+    var middlePrice = Model.MaxPrice / 2;
+}
+
+<h1 class="display-3 text-center font-weight-bold">Looking for a room ?</h1>
+
+<br />
+
+@if (TempData["ShowRoomIndexError"] != null)
+{
+    <p class="p-3 mb-2 bg-danger text-white">@TempData["ShowRoomIndexError"]</p>
+}
+
+<form asp-action="ShowRooms" asp-controller="Room" method="post">
+
+    @if (TempData.Peek("MyList") != null)
+    {
+        <div class="form-row">
+            You have already something in your basket, it means that the next rooms that you will search will be for the same dates that
+            the room in your basket.
+        </div>
+    }
+
+    <div class="form-row">
+        @if (TempData.Peek("MyList") == null)
+        {
+            <div class="col">
+                <label asp-for="CheckInDate">Choose your check-in date</label>
+                <input asp-for="CheckInDate" type="date" value="@todayDate" min="@todayDate" />
+            </div>
+
+            <br>
+
+            <div class="col">
+                <label asp-for="CheckOutDate">Choose your check-out date</label>
+                <input asp-for="CheckOutDate" type="date" value="@tomorrowDate" min="@tomorrowDate" />
+            </div>
+        }
+        else
+        {
+            <br />
+
+            <div class="col">
+                <input class="form-control" type="date" value="@todayDate" placeholder="@todayDate" readonly>
+            </div>
+
+            <br />
+
+            <div class="col">
+                <input class="form-control" type="date" value="@tomorrowDate" placeholder="@tomorrowDate" readonly>
+            </div>
+
+        }
+    </div>
+
+    <br />
+
+    <div class="form-row">
+
+        <div class="col text-center">
+            <div class="form-group">
+                <label for="locationSelection">Choose your location</label>
+                <select asp-for="Location" multiple class="form-control" id="locationSelection">
+                    @foreach (var location in Model.PossibleLocations)
+                    {
+                        <option>@location</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="col text-center">
+            <div class="form-group">
+                <label for="categorySelection">Choose your category</label>
+                <select asp-for="Category" multiple class="form-control" id="categorySelection">
+                    @foreach (var category in Model.PossibleCategories)
+                    {
+                        <option>@category</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="col text-center">
+            <div class="form-group">
+                <label for="typeSelection">Choose your type</label>
+                <select asp-for="Type" multiple class="form-control" id="typeSelection">
+                    @foreach (var type in Model.PossibleTypes)
+                    {
+                        <option>@type</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-row">
+
+        <div class="col">
+
+            <div class="form-check form-check-inline">
+                <input asp-for="HasWifi" class="form-check-input" type="checkbox" id="wifiCheckbox">
+                <label class="form-check-label" for="wifiCheckbox">Hotel with wifi ?</label>
+            </div>
+
+            <br />
+
+            <div class="form-check form-check-inline">
+                <input asp-for="HasParking" class="form-check-input" type="checkbox" id="parkingCheckbox">
+                <label class="form-check-label" for="parkingCheckbox">Hotel with Parking ?</label>
+            </div>
+        </div>
+
+        <div class="col">
+
+            <div class="form-check form-check-inline">
+                <input asp-for="HasTV" class="form-check-input" type="checkbox" id="tvCheckbox">
+                <label class="form-check-label" for="tvCheckbox">Room with TV ?</label>
+            </div>
+
+            <br />
+
+            <div class="form-check form-check-inline">
+                <input asp-for="HasHairDryer" class="form-check-input" type="checkbox" id="hairCheckbox">
+                <label class="form-check-label" for="hairCheckbox">Room with hair dryer ?</label>
+            </div>
+        </div>
+
+        <div class="col">
+            <label asp-for="Price" for="maximumPrice">Choose your maximum price</label>
+            <input asp-for="Price" id="maximumPrice" type="range" class="custom-range" value="@middlePrice" min="0" max="@Model.MaxPrice" oninput="this.nextElementSibling.value = this.value">
+            <output>@middlePrice</output>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <center><button type="submit" class="btn btn-secondary">Search rooms</button></center>
+        </div>
+    </div>
+</form>

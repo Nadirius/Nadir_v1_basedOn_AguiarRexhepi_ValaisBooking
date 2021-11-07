@@ -1,0 +1,123 @@
+﻿@model UI.ClientInformationModel
+
+@{
+    ViewData["Title"] = "Your basket";
+    decimal totalToPay = 0.0M;
+
+    var checkInDate = "";
+    var checkOutDate = "";
+    var numberOfNights = 0;
+
+    if (TempData.Peek("MyList") != null)
+    {
+        checkInDate = ((DateTime)TempData.Peek("CheckInDate")).ToShortDateString();
+        checkOutDate = ((DateTime)TempData.Peek("CheckOutDate")).ToShortDateString();
+        var number = ((DateTime)TempData.Peek("CheckOutDate")).Subtract((DateTime)TempData.Peek("CheckInDate"));
+        numberOfNights = number.Days;
+    }
+}
+
+@if (TempData.Peek("MyList") != null)
+{
+    <h1 class="display-3 text-center font-weight-bold">Your basket</h1>
+    <br />
+    <small class="text-muted">Check-in date : @checkInDate | check-out date : @checkOutDate</small>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Room number</th>
+                <th style="text-align:center">Room description</th>
+                <th style="text-align:center">Room price Per Night</th>
+                <th style="text-align:center">Number of night</th>
+                <th style="text-align:right">Total for the period</th>
+                <th style="text-align:center">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ReservedRoom)
+            {
+                totalToPay += item.Price * numberOfNights;
+                <tr>
+                    <td>
+                        @item.Number
+                    </td>
+                    <td style="text-align:center">
+                        @item.Description
+                    </td>
+                    <td style="text-align:center">
+                        @String.Format("{0:0.00}", item.Price) CHF
+                    </td>
+                    <td style="text-align:center">
+                        @numberOfNights
+                    </td>
+                    <td style="text-align:right">
+                        @String.Format("{0:0.00}", item.Price * numberOfNights) CHF
+                    </td>
+                    <td>
+                        @Html.ActionLink("Remove from basket", "DeleteFromBasket", new { id = item.IdRoom }, new { @class = "text-danger text-center" })
+                    </td>
+                </tr>
+            }
+            <tr class="p-3 mb-2 bg-secondary text-white">
+                <th>Total without taxes</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th style="text-align:right">
+                    @String.Format("{0:0.00}", totalToPay) CHF
+                </th>
+                <th></th>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+
+    <hr />
+
+    <br />
+
+    <h1 class="display-3 text-center font-weight-bold">Please fill in your informations</h1>
+
+    <br />
+
+    @if (TempData["ShowBasketError"] != null)
+    {
+        <p class="p-3 mb-2 bg-danger text-white text-center">
+            @TempData["ShowBasketError"]
+        </p>
+    }
+
+    <br />
+
+    <form asp-controller="Reservation" asp-action="ReserveRoomsFromBasket" method="post">
+        <div class="form-group">
+            <input asp-for="Firstname" id="firstnameInput" type="text" class="form-control" placeholder="Enter your firstname">
+            <br />
+            <input asp-for="LastName" id="lastnameInput" type="text" aria-describedby="infoHelp" class="form-control" placeholder="Enter your lastname">
+            <small id="infoHelp" class="form-text text-muted">We will never share your information with anyone.</small>
+        </div>
+        <center><button type="submit" class="btn btn-secondary">Reserve now</button></center>
+    </form>
+}
+else
+{
+    <h1 class="display-3 text-center font-weight-bold">There is currently nothing in your shopping cart.</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <center><img src="~/images/shoppingCart.jpg" class="img-fluid" alt="Empty shopping cart" width="300" height="300" /></center>
+}
+
+<script>
+    function init() {
+        document.getElementById("firstnameInput").value = "";
+        document.getElementById("lastnameInput").value = "";
+    }
+    window.onload = init;
+</script>
+
+
+

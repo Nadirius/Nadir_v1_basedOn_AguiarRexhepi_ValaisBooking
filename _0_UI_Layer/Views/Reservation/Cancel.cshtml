@@ -1,0 +1,58 @@
+﻿@model UI.DeleteReservationInputModel
+@{
+    ViewData["Title"] = "Cancel a reservation";
+}
+
+
+<h1 class="display-3 text-center font-weight-bold">You want to cancel a room ?</h1>
+
+<br />
+
+@if (TempData["ShowCancelError"] != null)
+
+    switch ((int)TempData["ShowCancelError"])
+    {
+        case 0:
+            <p class="p-3 mb-2 bg-success text-white">
+                Your reservation has been correctly cancelled.
+            </p>
+            break;
+        case 1:
+            <p class="p-3 mb-2 bg-danger text-white">
+                You can't delete this reservation anymore.
+            </p>
+            break;
+        default:
+            <p class="p-3 mb-2 bg-danger text-white">
+                It seems that the reservation identifier does not exist. Are you sure you entered the right one ?
+            </p>
+         break;
+}
+
+<br />
+
+<form asp-controller="Reservation" asp-action="DeleteReservation" method="post">
+    <div class="form-group">
+        <input asp-for="ReservationToDeleteIdentification" id="textReservation" type="text" class="form-control" aria-describedby="reservationHelp" placeholder="Enter reservation number">
+        <small id="reservationHelp" class="form-text text-muted">Enter the identification number that was given to you when you made the reservation. </small>
+    </div>
+    <center><button type="submit" class="btn btn-secondary">Cancel reservation</button></center>
+</form>
+
+<script>
+    function init() {
+        document.getElementById("textReservation").value = "";
+    }
+    window.onload = init;
+</script>
+
+
+
+
+
+
+
+
+
+
+
