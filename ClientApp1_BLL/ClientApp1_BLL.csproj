@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\_2_DTO_Layer\_2_DTO_Layer.csproj" />
+    <ProjectReference Include="..\ClientApp3_DTO\ClientApp3_DTO.csproj" />
+    <ProjectReference Include="..\_2_DTO_Layer\ClientApp3_DTO.csproj" />
   </ItemGroup>
 
 </Project>

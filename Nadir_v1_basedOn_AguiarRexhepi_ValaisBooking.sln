@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_0_UI_Layer", "_0_UI_Layer\_0_UI_Layer.csproj", "{AB988268-52A6-4784-8852-DF0E11108897}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp0_UI", "ClientApp0_UI\ClientApp0_UI.csproj", "{AB988268-52A6-4784-8852-DF0E11108897}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_1_BLL_Layer", "_1_BLL_Layer\_1_BLL_Layer.csproj", "{0F22CC67-3137-4B92-81BD-083863FB3613}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp1_BLL", "ClientApp1_BLL\ClientApp1_BLL.csproj", "{0F22CC67-3137-4B92-81BD-083863FB3613}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_2_DTO_Layer", "_2_DTO_Layer\_2_DTO_Layer.csproj", "{573433AF-D128-48A8-8D03-25F5E4162349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp3_DTO", "ClientApp3_DTO\ClientApp3_DTO.csproj", "{573433AF-D128-48A8-8D03-25F5E4162349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApp2_WAPIL", "ClientApp2_WAPIL\ClientApp2_WAPIL.csproj", "{A0E4BE61-918E-4CD3-8E69-9A6810CF8BD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{573433AF-D128-48A8-8D03-25F5E4162349}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{573433AF-D128-48A8-8D03-25F5E4162349}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{573433AF-D128-48A8-8D03-25F5E4162349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0E4BE61-918E-4CD3-8E69-9A6810CF8BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E4BE61-918E-4CD3-8E69-9A6810CF8BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E4BE61-918E-4CD3-8E69-9A6810CF8BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E4BE61-918E-4CD3-8E69-9A6810CF8BD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

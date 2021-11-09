@@ -43,7 +43,10 @@ namespace APP
             );
 
             services.AddHttpClient("AtValaisAccomodation", httpClient =>
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"))
+                {
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                }
             );
         }
 
