@@ -8,15 +8,12 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClientApp3_DTO\ClientApp3_DTO.csproj" />
-    <ProjectReference Include="..\_2_DTO_Layer\ClientApp3_DTO.csproj" />
+    <ProjectReference Include="..\ClientApp2_WAPIL\ClientApp2_WAPIL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace UI
+﻿namespace UI
 {
-	public class DeleteReservationInputModel
-	{
-		public string ReservationToDeleteIdentification { get; set; }
-	}
+    public class DeleteReservationInputModel
+    {
+        public string ReservationToDeleteIdentification { get; set; }
+    }
 }

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-	public interface IPictureManager
-	{
-		Task<ActionResult<List<Picture>>> GetPicturesFromRoom(int idRoom);
-	}
+    public interface IPictureManager
+    {
+        Task<ActionResult<List<Picture>>> GetPicturesFromRoom(int idRoom);
+    }
 }

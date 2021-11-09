@@ -40,9 +40,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClientApp1_BLL\ClientApp1_BLL.csproj" />
-    <ProjectReference Include="..\ClientApp3_DTO\ClientApp3_DTO.csproj" />
-    <ProjectReference Include="..\_1_BLL_Layer\ClientApp1_BLL.csproj" />
-    <ProjectReference Include="..\_2_DTO_Layer\ClientApp3_DTO.csproj" />
   </ItemGroup>
 
 </Project>

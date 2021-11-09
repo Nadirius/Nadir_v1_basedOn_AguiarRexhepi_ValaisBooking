@@ -1,17 +1,20 @@
 ﻿using DTO;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Net.Http.Json;
-using System.Net.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Mvc;
+using WAPIL;
 
 namespace BLL
 {
-	public class RoomManager : BLLManager, IRoomManager
-	{
-		public RoomManager(IConfiguration configuration, HttpClient httpClient) : base(configuration, httpClient) {}
+    public class RoomManager : IRoomManager
+    {
+        private readonly IBookingWebApiInvoker _helloWorld;
+
+        public RoomManager(IBookingWebApiInvoker apiInvoker)
+        {
+            this._helloWorld = apiInvoker;
+        }
 
         public Task<ActionResult<decimal>> GetMaximumPrice()
         {
@@ -33,5 +36,5 @@ namespace BLL
             throw new NotImplementedException();
         }
     }
-	
+
 }

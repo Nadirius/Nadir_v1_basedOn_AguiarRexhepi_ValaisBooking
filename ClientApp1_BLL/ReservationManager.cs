@@ -1,22 +1,23 @@
 ﻿using DTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
+using WAPIL;
 
 namespace BLL
 {
-	//
-	// Summary:
-	//     Class that contains the methods to manage informations from ReservationDB
-	//
-	public class ReservationManager : BLLManager, IReservationManager
-	{
+    //
+    // Summary:
+    //     Class that contains the methods to manage informations from ReservationDB
+    //
+    public class ReservationManager : IReservationManager
+    {
+        private readonly IBookingWebApiInvoker _helloWorld;
 
-		public ReservationManager(IConfiguration configuration, HttpClient httpClient) : base(configuration, httpClient) {}
+        public ReservationManager(IBookingWebApiInvoker apiInvoker)
+        {
+            this._helloWorld = apiInvoker;
+        }
 
         public async Task<ActionResult<int>> DeleteReservation(string reservationToDelete)
         {

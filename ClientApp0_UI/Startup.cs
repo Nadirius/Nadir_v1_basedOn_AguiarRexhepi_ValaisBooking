@@ -1,15 +1,12 @@
 using BLL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
+using WAPIL;
 
 namespace APP
 {
@@ -25,6 +22,7 @@ namespace APP
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IBookingWebApiInvoker, BookingWebApiInvoker>();
             services.AddScoped<IHotelManager, HotelManager>();
             services.AddScoped<IPictureManager, PictureManager>();
             services.AddScoped<IReservationManager, ReservationManager>();
@@ -44,7 +42,7 @@ namespace APP
 
             services.AddHttpClient("AtValaisAccomodation", httpClient =>
                 {
-                httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 }
             );
