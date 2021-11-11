@@ -8,10 +8,10 @@ namespace BLL
 {
     public interface IReservationManager
     {
-        Task<ActionResult<Reservation>> GetReservationsWithIdentification(string identification);
+        Task<Reservation> GetReservationsWithIdentificationAsync(string identification);
 
-        Task<ActionResult<Reservation>> InsertReservation(string firstName, string lastName, DateTime checkInDate, DateTime checkOutDate, decimal amount, int idRoom);
+        Task<Reservation> InsertReservationAsync(string firstName, string lastName, DateTime checkInDate, DateTime checkOutDate, decimal amount, int RoomId);
 
-        Task<ActionResult<int>> DeleteReservation(string reservationToDelete);
+        Task<int> DeleteReservationAsync(string reservationToDelete);
     }
 }

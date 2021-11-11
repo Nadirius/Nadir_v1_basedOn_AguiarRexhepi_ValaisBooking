@@ -54,7 +54,7 @@
                         @String.Format("{0:0.00}", item.Price * numberOfNights) CHF
                     </td>
                     <td>
-                        @Html.ActionLink("Remove from basket", "DeleteFromBasket", new { id = item.IdRoom }, new { @class = "text-danger text-center" })
+                        @Html.ActionLink("Remove from basket", "DeleteFromBasket", new { id = item.RoomId }, new { @class = "text-danger text-center" })
                     </td>
                 </tr>
             }

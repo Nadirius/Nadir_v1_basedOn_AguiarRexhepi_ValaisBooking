@@ -2,7 +2,7 @@
 {
     public class Room
     {
-        public int IdRoom { get; set; }
+        public int RoomId { get; set; }
 
         public int Number { get; set; }
 
@@ -16,7 +16,14 @@
 
         public bool HasHairDryer { get; set; }
 
-        public int IdHotel { get; set; }
+        public int HotelId { get; set; }
+
+        public override string ToString()
+        {
+            return $"{RoomId} {Number} {Description} {Type} " +
+                $"{Price} {HasTV} {HasHairDryer} {HotelId}";
+        }
+
 
     }
 }

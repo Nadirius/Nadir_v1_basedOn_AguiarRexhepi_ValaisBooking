@@ -36,15 +36,15 @@ namespace UI
                 return View("Cancel");
             }
 
-            var result = ReservationManager.DeleteReservation(deleteReservationInformation.ReservationToDeleteIdentification);
+            var result = ReservationManager.DeleteReservationAsync(deleteReservationInformation.ReservationToDeleteIdentification);
 
-            if (result.Result.Value == 0)
+            if (result.Result == 0)
             {
                 TempData["ShowCancelError"] = 3;
                 return View("Cancel");
             }
 
-            if (result.Result.Value == 2)
+            if (result.Result == 2)
             {
                 TempData["ShowCancelError"] = 1;
                 return View("Cancel");
@@ -95,13 +95,13 @@ namespace UI
 
                 foreach (var item in (int[])temp)
                 {
-                    roomToReserve.Add(RoomManager.GetRoomWithId(item, (DateTime)TempData.Peek("CheckInDate"), (DateTime)TempData.Peek("CheckOutDate")).Result.Value);
+                    roomToReserve.Add(RoomManager.GetRoomWithIdAsync(item, (DateTime)TempData.Peek("CheckInDate"), (DateTime)TempData.Peek("CheckOutDate")).Result);
                 }
 
                 foreach (var room in roomToReserve)
                 {
-                    reservations.Add(ReservationManager.InsertReservation(clientInformation.Firstname, clientInformation.LastName, (DateTime)TempData.Peek("CheckInDate"), (DateTime)TempData.Peek("CheckOutDate"),
-                        room.Price * numberOfNightInt, room.IdRoom).Result.Value);
+                    reservations.Add(ReservationManager.InsertReservationAsync(clientInformation.Firstname, clientInformation.LastName, (DateTime)TempData.Peek("CheckInDate"), (DateTime)TempData.Peek("CheckOutDate"),
+                        room.Price * numberOfNightInt, room.RoomId).Result);
                 }
 
                 TempData["MyList"] = null;

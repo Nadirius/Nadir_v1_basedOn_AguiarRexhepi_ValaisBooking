@@ -6,7 +6,7 @@ namespace UI
 {
     public class ClientInformationModel
     {
-        public List<Room> ReservedRoom { get; set; }
+        public ICollection<Room> ReservedRoom { get; set; }
 
         [Required]
         [RegularExpression("^[\\p{L} \\.'\\-]+$")]

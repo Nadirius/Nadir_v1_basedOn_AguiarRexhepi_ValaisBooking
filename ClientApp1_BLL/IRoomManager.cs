@@ -9,23 +9,10 @@ namespace BLL
 
     public interface IRoomManager
     {
-
-        Task<ActionResult<Room>> GetRoomWithId(int idRoom, DateTime checkInDate, DateTime checkOutDate);
-
-        Task<ActionResult<List<Room>>> GetRoomsWithCriteria(DateTime checkInDate, 
-            DateTime checkOutDate, 
-            List<string> location = null, 
-            List<int> category = null, 
-            bool hasWifi = true,
-            bool hasParking = true, 
-            List<int> type = null, 
-            decimal price = 0.0M, 
-            bool hasTV = true, 
-            bool hasHairDryer = true);
-
-        Task<ActionResult<List<int>>> GetTypesAvailable();
-
-        Task<ActionResult<decimal>> GetMaximumPrice();
-
+        Task<decimal> GetMaximumPriceAsync();
+        Task<ICollection<Room>> GetRoomsAsync();
+        Task<ICollection<Room>> GetRoomsWithCriteriaAsync(DateTime checkInDate, DateTime checkOutDate, ICollection<string> location = null, ICollection<int> category = null, bool hasWifi = true, bool hasParking = true, ICollection<int> type = null, decimal price = 0.0M, bool hasTV = true, bool hasHairDryer = true);
+        Task<Room> GetRoomWithIdAsync(int RoomId, DateTime checkInDate, DateTime checkOutDate);
+        Task<ICollection<int>> GetTypesAvailableAsync();
     }
 }

@@ -14,7 +14,7 @@ namespace BLL
         {
             this._helloWorld = apiInvoker;
         }
-        public async Task<ActionResult<List<Picture>>> GetPicturesFromRoom(int idRoom)
+        public async Task<List<Picture>> GetPicturesFromRoomAsync(int RoomId)
         {
             List<Picture> results = null;
             return results;

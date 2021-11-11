@@ -9,7 +9,7 @@ namespace UI
 
         public Hotel ResultHotel { get; set; }
 
-        public List<Picture> ResultPictures { get; set; }
+        public ICollection<Picture> ResultPictures { get; set; }
 
     }
 }

@@ -3,7 +3,7 @@ namespace DTO
 {
     public class Hotel
     {
-        public int IdHotel { get; set; }
+        public int HotelId { get; set; }
 
         public string Name { get; set; }
 
@@ -22,6 +22,7 @@ namespace DTO
         public string Email { get; set; }
 
         public string Website { get; set; }
+
 
     }
 }

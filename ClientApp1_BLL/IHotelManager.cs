@@ -7,11 +7,10 @@ namespace BLL
 {
     public interface IHotelManager
     {
-        Task<ActionResult<Hotel>> GetHotelWithId(int idHotel);
-
-
-        Task<ActionResult<List<string>>> GetLocationsAvailable();
-
-        Task<ActionResult<List<int>>> GetCategoriesAvailable();
+        Task<ICollection<int>> GetCategoriesAvailableAsync();
+        Task<ICollection<Room>> GetHotelRoomsAsync(int roomId);
+        Task<ICollection<Hotel>> GetHotelsAsync();
+        Task<Hotel> GetHotelWithIdAsync(int id);
+        Task<ICollection<string>> GetLocationsAvailableAsync();
     }
 }

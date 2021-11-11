@@ -40,10 +40,10 @@ namespace UI
 
         public IActionResult Index()
         {
-            var locationsAvailable = HotelManager.GetLocationsAvailable().Result.Value;
-            var categoriesAvailable = HotelManager.GetCategoriesAvailable().Result.Value;
-            var typesAvailable = RoomManager.GetTypesAvailable().Result.Value;
-            var maximumPrice = RoomManager.GetMaximumPrice().Result.Value;
+            var locationsAvailable = HotelManager.GetLocationsAvailableAsync().Result;
+            var categoriesAvailable = HotelManager.GetCategoriesAvailableAsync().Result;
+            var typesAvailable = RoomManager.GetTypesAvailableAsync().Result;
+            var maximumPrice = RoomManager.GetMaximumPriceAsync().Result;
             maximumPrice = Math.Round(maximumPrice / 100, 0) * 100;
 
             defaultInformation = new SearchRoomInputModel()
@@ -88,11 +88,11 @@ namespace UI
                 checkOutDate = DateTime.Parse(roomInformation.CheckOutDate);
             }
 
-            var resultRooms = RoomManager.GetRoomsWithCriteria(checkInDate, checkOutDate,
+            var resultRooms = RoomManager.GetRoomsWithCriteriaAsync(checkInDate, checkOutDate,
                 roomInformation.Location, roomInformation.Category,
                 roomInformation.HasWifi, roomInformation.HasParking,
                 roomInformation.Type, roomInformation.Price,
-                roomInformation.HasTV, roomInformation.HasHairDryer).Result.Value;
+                roomInformation.HasTV, roomInformation.HasHairDryer).Result;
 
             if (resultRooms != null)
             {
@@ -103,13 +103,13 @@ namespace UI
                     {
                         customerRoomsID = ((int[])TempData.Peek("MyList")).ToList();
 
-                        if (!customerRoomsID.Contains(room.IdRoom))
+                        if (!customerRoomsID.Contains(room.RoomId))
                         {
                             resultWithInformations.Add(new RoomWithInformationsModel()
                             {
                                 ResultRoom = room,
-                                ResultHotel = HotelManager.GetHotelWithId(room.IdHotel).Result.Value,
-                                ResultPictures = PictureManager.GetPicturesFromRoom(room.IdRoom).Result.Value
+                                ResultHotel = HotelManager.GetHotelWithIdAsync(room.HotelId).Result,
+                                ResultPictures = PictureManager.GetPicturesFromRoomAsync(room.RoomId).Result
                             });
                         }
                     }
@@ -118,8 +118,8 @@ namespace UI
                         resultWithInformations.Add(new RoomWithInformationsModel()
                         {
                             ResultRoom = room,
-                            ResultHotel = HotelManager.GetHotelWithId(room.IdHotel).Result.Value,
-                            ResultPictures = PictureManager.GetPicturesFromRoom(room.IdRoom).Result.Value
+                            ResultHotel = HotelManager.GetHotelWithIdAsync(room.HotelId).Result,
+                            ResultPictures = PictureManager.GetPicturesFromRoomAsync(room.RoomId).Result
                         });
                     }
                 }
@@ -264,7 +264,7 @@ namespace UI
 
             if (roomInformation.Location != null)
             {
-                if (roomInformation.Location.Count == 0)
+                if (roomInformation.Location.Count() == 0)
                 {
                     roomIndexError.Append("The location you are trying to access does not exist.");
                     return false;
@@ -283,7 +283,7 @@ namespace UI
 
             if (roomInformation.Category != null)
             {
-                if (roomInformation.Category.Count == 0)
+                if (roomInformation.Category.Count() == 0)
                 {
                     roomIndexError.Append("The category you are trying to access does not exist.");
                     return false;
@@ -301,7 +301,7 @@ namespace UI
 
             if (roomInformation.Type != null)
             {
-                if (roomInformation.Type.Count == 0)
+                if (roomInformation.Type.Count() == 0)
                 {
                     roomIndexError.Append("The type you are trying to access does not exist.");
                     return false;
@@ -345,7 +345,7 @@ namespace UI
             var roomsInBasket = new List<Room>();
             foreach (var roomID in customerRoomsID)
             {
-                roomsInBasket.Add(RoomManager.GetRoomWithId(roomID, (DateTime)TempData.Peek("CheckInDate"), (DateTime)TempData.Peek("CheckOutDate")).Result.Value);
+                roomsInBasket.Add(RoomManager.GetRoomWithIdAsync(roomID, (DateTime)TempData.Peek("CheckInDate"), (DateTime)TempData.Peek("CheckOutDate")).Result);
             }
             var clientInformation = new ClientInformationModel()
             {
@@ -374,8 +374,8 @@ namespace UI
 
             if (!flag)
             {
-                var room = RoomManager.GetRoomWithId(id, (DateTime)TempData.Peek("CheckInDate"), (DateTime)TempData.Peek("CheckOutDate")).Result.Value;
-                customerRoomsID.Add(room.IdRoom);
+                var room = RoomManager.GetRoomWithIdAsync(id, (DateTime)TempData.Peek("CheckInDate"), (DateTime)TempData.Peek("CheckOutDate")).Result;
+                customerRoomsID.Add(room.RoomId);
                 TempData["MyList"] = customerRoomsID;
             }
 

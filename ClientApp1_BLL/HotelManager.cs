@@ -1,6 +1,6 @@
-﻿using DTO;
+﻿
+using DTO;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WAPIL;
@@ -17,36 +17,32 @@ namespace BLL
             this._helloWorld = apiInvoker;
         }
 
-        public async Task<IEnumerable<Hotel>> GetAsync()
+        //Get Hotels - ok
+        public async Task<ICollection<Hotel>> GetHotelsAsync()
         {
-            return await _helloWorld.InvokeGet<IEnumerable<Hotel>>("hotels");
+            return await _helloWorld.InvokeGet<ICollection<Hotel>>("hotels");
         }
 
-        public async Task<Hotel> GetByIdAsync(int id)
+        //Get Hotel by id - ok
+        public async Task<Hotel> GetHotelWithIdAsync(int id)
         {
             return await _helloWorld.InvokeGet<Hotel>($"hotels/{id}");
         }
 
-                public async Task<IEnumerable<Room>> GetHotelRoomsAsync(int roomId)
+        //Get Hotel Rooms - ok
+        public async Task<ICollection<Room>> GetHotelRoomsAsync(int roomId)
         {
-            return await _helloWorld.InvokeGet<IEnumerable<Room>>($"hotels/{roomId}/rooms");
+            return await _helloWorld.InvokeGet<ICollection<Room>>($"hotels/{roomId}/rooms");
         }
 
-        public async Task<ActionResult<Hotel>> GetHotelWithId(int idHotel)
+        public async Task<ICollection<string>> GetLocationsAvailableAsync()
         {
-            throw new System.NotImplementedException();
+            return await _helloWorld.InvokeGet<ICollection<string>>($"hotels/locations");
         }
 
-        public async Task<ActionResult<List<string>>> GetLocationsAvailable()
+        public async Task<ICollection<int>> GetCategoriesAvailableAsync()
         {
-            throw new System.NotImplementedException();
-        }
-
-
-
-        public async Task<ActionResult<List<int>>> GetCategoriesAvailable()
-        {
-            throw new System.NotImplementedException();
+            return await _helloWorld.InvokeGet<ICollection<int>>($"hotels/Categories");
         }
 
     }

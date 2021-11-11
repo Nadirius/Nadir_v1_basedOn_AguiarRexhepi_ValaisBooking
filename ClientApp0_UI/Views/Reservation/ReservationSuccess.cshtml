@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DTO.Reservation>
+﻿@model ICollection<DTO.Reservation>
 
 @{
     ViewData["Title"] = "Done !";
@@ -27,7 +27,7 @@
     totalToPay += item.Amount;
         <tr>
             <td class="p-3 mb-2 bg-success text-white font-weight-bold" style="text-align:left">
-                @Html.DisplayFor(modelItem => item.IdReservation)@Html.DisplayFor(modelItem => item.FirstName)@Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.ReservationId)@Html.DisplayFor(modelItem => item.FirstName)@Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td style="text-align:center">
                 @item.CheckIn.ToShortDateString()

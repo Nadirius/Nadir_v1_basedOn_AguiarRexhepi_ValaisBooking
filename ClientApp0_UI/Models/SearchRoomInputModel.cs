@@ -8,15 +8,15 @@ namespace UI
 
         public string CheckOutDate { get; set; }
 
-        public List<string> Location { get; set; }
+        public ICollection<string> Location { get; set; }
 
-        public List<int> Category { get; set; }
+        public ICollection<int> Category { get; set; }
 
         public bool HasWifi { get; set; }
 
         public bool HasParking { get; set; }
 
-        public List<int> Type { get; set; }
+        public ICollection<int> Type { get; set; }
 
         public decimal Price { get; set; }
 
@@ -24,11 +24,11 @@ namespace UI
 
         public bool HasHairDryer { get; set; }
 
-        public List<string> PossibleLocations { get; set; }
+        public ICollection<string> PossibleLocations { get; set; }
 
-        public List<int> PossibleCategories { get; set; }
+        public ICollection<int> PossibleCategories { get; set; }
 
-        public List<int> PossibleTypes { get; set; }
+        public ICollection<int> PossibleTypes { get; set; }
 
         public decimal MaxPrice { get; set; }
 

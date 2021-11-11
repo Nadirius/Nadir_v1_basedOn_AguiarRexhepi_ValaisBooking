@@ -28,7 +28,7 @@ namespace UI
 
         public IActionResult Index(int id)
         {
-            var hotelToShow = HotelManager.GetHotelWithId(id);
+            var hotelToShow = HotelManager.GetHotelWithIdAsync(id);
             return View(hotelToShow);
         }
     }

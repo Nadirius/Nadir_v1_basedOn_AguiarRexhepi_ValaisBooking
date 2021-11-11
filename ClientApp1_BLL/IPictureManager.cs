@@ -7,6 +7,6 @@ namespace BLL
 {
     public interface IPictureManager
     {
-        Task<ActionResult<List<Picture>>> GetPicturesFromRoom(int idRoom);
+        Task<List<Picture>> GetPicturesFromRoomAsync(int RoomId);
     }
 }

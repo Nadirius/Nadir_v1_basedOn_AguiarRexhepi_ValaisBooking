@@ -3,7 +3,7 @@ namespace DTO
 {
     public class Reservation
     {
-        public int IdReservation { get; set; }
+        public int ReservationId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -15,7 +15,7 @@ namespace DTO
 
         public decimal Amount { get; set; }
 
-        public int IdRoom { get; set; }
+        public int RoomId { get; set; }
 
     }
 }

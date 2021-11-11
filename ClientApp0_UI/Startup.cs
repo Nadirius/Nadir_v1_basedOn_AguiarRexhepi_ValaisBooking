@@ -34,18 +34,14 @@ namespace APP
 
             //services.AddCookiePolicy(c => new CookiePolicyOptions());
 
-            services.AddHttpClient("AtValaisAccomodation");
-
-            services.AddHttpClient("AtValaisAccomodation", httpClient =>
-                httpClient.BaseAddress = new Uri(Configuration.GetValue<string>("RootWAPI"))
-            );
-
-            services.AddHttpClient("AtValaisAccomodation", httpClient =>
-                {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                }
-            );
+            // Adding HttpClient factory named "AtBookingAPI" into dedpendeny injection system
+            // it make it accessecible from any point of the app
+            services.AddHttpClient("AtBookingAPI", config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("RootWAPI"));
+                config.DefaultRequestHeaders.Accept.Clear();
+                config.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
